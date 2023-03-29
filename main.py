@@ -12,6 +12,7 @@ screen.tracer(0)
 screen.listen()
 
 player = Player()
+scoreboard = Scoreboard()
 
 screen.onkey(player.move, "Up")
 
@@ -32,10 +33,13 @@ while game_is_on:
     for car in car_list:
         if car.xcor()<20 and car.xcor()>-20 and abs(car.ycor() - player.ycor()) < 10:
             game_is_on = False
+            scoreboard.show_game_over()
     
     if player.ycor() > FINISH_LINE_Y:
         player.start_from_bottom()
+        scoreboard.update_level()
         for car in car_list:
             car.increase_velocity()
     counter+=1
 
+screen.exitonclick()
