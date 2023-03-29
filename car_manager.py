@@ -13,7 +13,11 @@ class CarManager(Turtle):
         self.color(random.choice(COLORS))
         self.shapesize(stretch_wid=1, stretch_len=2)
         self.goto(310,random.randint(-250, 250))
+        self.velocity = STARTING_MOVE_DISTANCE
 
     def move(self):
-        new_x = self.xcor() - MOVE_INCREMENT
+        new_x = self.xcor() - (self.velocity)
         self.goto(new_x,self.ycor())
+    
+    def increase_velocity(self):
+        self.velocity+=MOVE_INCREMENT

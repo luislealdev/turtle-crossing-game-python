@@ -4,6 +4,8 @@ from player import Player
 from car_manager import CarManager
 from scoreboard import Scoreboard
 
+FINISH_LINE_Y = 280
+
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
@@ -28,7 +30,12 @@ while game_is_on:
     screen.update()
 
     for car in car_list:
-        if abs(car.xcor() - player.xcor()) < 21 or abs(car.ycor() - player.ycor()) < 11:
+        if car.xcor()<20 and car.xcor()>-20 and abs(car.ycor() - player.ycor()) < 10:
             game_is_on = False
+    
+    if player.ycor() > FINISH_LINE_Y:
+        player.start_from_bottom()
+        for car in car_list:
+            car.increase_velocity()
     counter+=1
 
